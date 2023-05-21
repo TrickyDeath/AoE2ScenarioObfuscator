@@ -1,12 +1,7 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from ui import Ui_MainWindow
 
-import random
-import uuid
 import sys
-
-CONFOUND_COUNT = 1000
-AUTHOR = "作者名"
 
 if __name__ == "__main__":
     # UI测试用

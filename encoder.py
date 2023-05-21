@@ -7,7 +7,6 @@ import time
 def comfound_triggers(scenario: AoE2DEScenario, confound_count, author, type, value=""):
     trigger_manager = scenario.trigger_manager
     # 修改原触发器名与描述
-    triggers_count = len(trigger_manager.triggers)
     for trigger in trigger_manager.triggers:
         if type == 0:
             randstr = str(random.Random()) + str(time.time()) + str(trigger)
