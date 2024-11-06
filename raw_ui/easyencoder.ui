@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>702</width>
-    <height>576</height>
+    <height>651</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>帝国时代2决定版场景触发混淆器(AoE2ScenarioObfuscator)</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -61,15 +61,84 @@
            </widget>
           </item>
           <item>
-           <widget class="QWidget" name="widget_2" native="true">
-            <layout class="QHBoxLayout" name="horizontalLayout">
+           <widget class="QWidget" name="widget_10" native="true">
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QLineEdit" name="OutputFilePath"/>
+              <widget class="QWidget" name="widget_2" native="true">
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLineEdit" name="OutputFilePath"/>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="OutputFilePathButton">
+                  <property name="text">
+                   <string>...</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
              </item>
              <item>
-              <widget class="QToolButton" name="OutputFilePathButton">
+              <widget class="QWidget" name="widget_11" native="true">
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QCheckBox" name="IsCustomFilename">
+                  <property name="text">
+                   <string>自定义文件名</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="CustomFilename">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="placeholderText">
+                   <string>例：ABCD（无需加.aoe2scenario）</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_12" native="true">
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_9">
                <property name="text">
-                <string>...</string>
+                <string>注：如果您不勾选自定义文件名或自定义文件名同目录下已有文件冲突，输出的文件名将自动加上开始混淆的时间。</string>
                </property>
               </widget>
              </item>
@@ -82,7 +151,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>注意：不要将场景源文件路径和场景导出文件路径设置在一起，避免源文件被覆盖！同时建议在混淆前对源文件进行备份！</string>
+          <string>建议在混淆前对源文件进行备份！建议不要将场景源文件路径和场景导出文件路径设置在一起，避免源文件被覆盖！</string>
          </property>
         </widget>
        </item>
@@ -234,9 +303,9 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_6">
+     <widget class="QLabel" name="StatementLabel">
       <property name="text">
-       <string>AoE2ScenarioEasyEncoder v0.01 by trickydeath</string>
+       <string>AoE2ScenarioObfuscator v0.03 by trickydeath</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

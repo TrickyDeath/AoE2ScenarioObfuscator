@@ -1,8 +1,9 @@
-from AoE2ScenarioParser.scenarios.aoe2_de_scenario import AoE2DEScenario
-from hashlib import md5
-
 import random
 import time
+from hashlib import md5
+
+from AoE2ScenarioParser.scenarios.aoe2_de_scenario import AoE2DEScenario
+
 
 def comfound_triggers(scenario: AoE2DEScenario, confound_count, author, type, value=""):
     trigger_manager = scenario.trigger_manager
@@ -33,9 +34,11 @@ def comfound_triggers(scenario: AoE2DEScenario, confound_count, author, type, va
     # 打乱顺序
     random.shuffle(trigger_manager.trigger_display_order)
 
+
 def open_scenario(file_path):
     scenario = AoE2DEScenario.from_file(file_path)
     return scenario
+
 
 def save_scenario(scenario: AoE2DEScenario, output_file_path):
     scenario.write_to_file(output_file_path)
