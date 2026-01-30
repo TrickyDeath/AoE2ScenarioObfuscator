@@ -6,21 +6,39 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  tag:
     if: >
       github.event_name == 'workflow_dispatch' || (
       github.event_name == 'pull_request' &&
       github.event.pull_request.merged == true &&
       startsWith(github.event.pull_request.user.login, 'dependabot')
       )
-
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ steps.tag.outputs.new_tag }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.base.ref || github.ref_name }}
+
+      - name: Create unique tag
+        id: tag
+        uses: anothrNick/github-tag-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          CUSTOM_TAG: dependabot-${{ github.run_number }}
+
+  build_windows:
+    needs: tag
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository at tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.tag.outputs.new_tag }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -37,16 +55,11 @@ jobs:
         run: |
           pyinstaller main.py --onefile --name AoE2ScenarioObfuscator --noconsole
 
-      - name: Create tag
-        id: tag
-        uses: anothrNick/github-tag-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          CUSTOM_TAG: dependabot-${{ github.run_number }}
-
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.tag.outputs.tag }}
+          tag_name: ${{ needs.tag.outputs.new_tag }}
           files: build/*
           fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
