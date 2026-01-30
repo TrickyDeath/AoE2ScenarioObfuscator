@@ -48,7 +48,7 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          pyinstaller main.py --onefile --name AoE2ScenarioObfuscator --noconsole
+          pyinstaller main.py --onefile --name AoE2ScenarioObfuscator --noconsole --collect-all AoE2ScenarioParser
 
       - name: Release
         uses: softprops/action-gh-release@v2.5.0
