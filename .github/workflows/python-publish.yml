@@ -48,8 +48,9 @@ jobs:
           pyinstaller main.py --onefile --name AoE2ScenarioObfuscator --noconsole
 
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2.5.0
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ needs.tag.outputs.new_tag }}
           files: dist/*
           fail_on_unmatched_files: true
