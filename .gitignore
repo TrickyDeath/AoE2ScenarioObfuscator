@@ -2,3 +2,4 @@ build
 dist
 *.spec
 *.cmd
+__pycache__

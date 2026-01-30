@@ -166,10 +166,10 @@ class UIMainWindow(Ui_MainWindow):
             print("执行时遇到错误：\n" + result.detail)
         self.Start.setDisabled(False)
 
-    def setStatement(self, version, update_time):
+    def setStatement(self, version, asp_version):
         self.StatementLabel.setText(
-            "AoE2ScenarioObfuscator v%s by trickydeath. Last update time: %s" %
-            (version, update_time))
+            "AoE2ScenarioObfuscator v%s by trickydeath. ASP version: %s" %
+            (version, asp_version))
 
 
 # UI测试用
