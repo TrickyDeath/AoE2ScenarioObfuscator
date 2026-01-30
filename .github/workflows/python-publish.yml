@@ -1,15 +1,18 @@
 name: Build and Release on Dependabot Merge
 
-# 触发条件：PR 合并事件
 on:
   pull_request:
     types: [closed]
+  workflow_dispatch:
 
 jobs:
   build:
     if: >
+      github.event_name == 'workflow_dispatch' || (
+      github.event_name == 'pull_request' &&
       github.event.pull_request.merged == true &&
       startsWith(github.event.pull_request.user.login, 'dependabot')
+      )
 
     runs-on: windows-latest
 
@@ -17,7 +20,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.base.ref }}
+          ref: ${{ github.event.pull_request.base.ref || github.ref_name }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
