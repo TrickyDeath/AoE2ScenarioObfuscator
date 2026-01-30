@@ -1,0 +1,52 @@
+name: Build and Release on Dependabot Merge
+
+# 触发条件：PR 合并事件
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  build:
+    if: >
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.user.login, 'dependabot')
+
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build with PyInstaller
+        run: |
+          pyinstaller main.py --onefile --name AoE2ScenarioObfuscator
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.run_number }}
+          name: AoE2ScenarioObfuscator v${{ github.run_number }}
+          body: "Built from Dependabot merge PR #${{ github.event.pull_request.number }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload executable to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/AoE2ScenarioObfuscator.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
