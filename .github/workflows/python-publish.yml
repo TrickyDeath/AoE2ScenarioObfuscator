@@ -22,9 +22,7 @@ jobs:
         uses: anothrNick/github-tag-action@1.75.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
           CUSTOM_TAG: dependabot-${{ github.run_number }}
-
 
   build_windows:
     needs: tag
@@ -53,5 +51,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.tag.outputs.new_tag }}
-          files: build/*
+          files: dist/*
           fail_on_unmatched_files: true
