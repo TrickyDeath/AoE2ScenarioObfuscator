@@ -3,3 +3,4 @@ dist
 *.spec
 *.cmd
 __pycache__
+.venv
