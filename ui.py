@@ -15,7 +15,7 @@ import traceback
 
 from PyQt5 import QtCore, QtWidgets
 
-from encoder import *
+from encoder import comfound_triggers, open_scenario, save_scenario
 from raw_ui.easyencoder import Ui_MainWindow
 
 
