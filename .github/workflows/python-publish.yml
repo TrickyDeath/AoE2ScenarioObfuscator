@@ -37,8 +37,19 @@ jobs:
         run: |
           pyinstaller main.py --onefile --name AoE2ScenarioObfuscator --noconsole
 
+      - name: Create unique tag for release
+        id: tag
+        run: |
+          TAG="dependabot-${{ github.run_number }}"
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag $TAG
+          git push origin $TAG
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ steps.tag.outputs.tag }}
           files: build/*
           fail_on_unmatched_files: true
