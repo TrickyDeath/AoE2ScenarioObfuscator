@@ -1,2 +1,2 @@
-AoE2ScenarioParser==0.7.1
+AoE2ScenarioParser==0.7.2
 PyQt5==5.15.9
